@@ -1,0 +1,6 @@
+replicas = 1
+emoji = "🕰️"
+port = 80
+
+
+readiness_path = "/"

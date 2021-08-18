@@ -1,0 +1,81 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hexklokk</title>
+  </head>
+
+  <body id="body">
+    <p id="clock"></p>
+
+    <button id="button" type="button" onclick="flipRadix()">hex</button>
+    <input id="number" type="number" disabled />
+    <script>
+      const body = document.getElementById("body");
+      const clock = document.getElementById("clock");
+      const number = document.getElementById("number");
+      const button = document.getElementById("button");
+
+      number.value = 10;
+      button.textContent = "hex";
+
+      const flipRadix = () => {
+        if (number.value == 10) {
+          number.value = 16;
+          button.textContent = "dec";
+        } else {
+          number.value = 10;
+          button.textContent = "hex";
+        }
+      };
+
+      const format = (date, radix) =>
+        [date.getHours(), date.getMinutes(), date.getSeconds()]
+          .map((n) => n.toString(radix).padStart(2, "0"))
+          .join("");
+
+      const update = () => {
+        const hexes = "#" + format(new Date(), number.value);
+        clock.textContent = hexes;
+        body.style.backgroundColor = hexes;
+
+        window.requestAnimationFrame(update);
+      };
+
+      window.requestAnimationFrame(update);
+    </script>
+
+    <style>
+      body {
+        height: 100vh;
+        margin: 0;
+        position: relative;
+      }
+
+      p {
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+
+        color: white;
+        font-size: 6em;
+        font-family: monospace;
+      }
+
+      /* Chrome, Safari, Edge, Opera */
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+        width: 3ch;
+      }
+    </style>
+  </body>
+</html>
