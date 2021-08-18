@@ -4,3 +4,4 @@ port = 80
 
 
 readiness_path = "/"
+default_environment="prod"
